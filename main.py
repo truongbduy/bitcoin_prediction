@@ -1,5 +1,5 @@
 import os
-os.chdir('/home/duytruong/Working Folder/home project')
+#os.chdir('/home/duytruong/Working Folder/home project')
 from dataio2 import *
 from kraken import * 
 from _config.settings import *
