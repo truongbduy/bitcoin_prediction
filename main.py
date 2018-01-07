@@ -1,5 +1,5 @@
 import os
-#os.chdir('/home/duytruong/Working Folder/home project')
+#os.chdir('/home/duytruong/Github/bitcoin_prediction')
 from dataio2 import *
 from kraken import * 
 from _config.settings import *
@@ -14,14 +14,14 @@ def train_model():
     X, y = create_xy_dataset(True)
     cmodel = XGBClassifier()
     cmodel.fit(X, y)
-    pickle.dump(cmodel, open("models/xgboost.pickle.dat", "wb"))
+    pickle.dump(cmodel, open(settings['model'], "wb"))
 
 def load_model():
-    cmodel = pickle.load(open("models/xgboost.pickle.dat", "rb"))
+    cmodel = pickle.load(open(settings['model'], "rb"))
     return cmodel
     
 def retrain_model(logger):
-    if time.strftime("%d") == '01' or time.strftime("%d") == '15':
+    if time.strftime("%d") == '01' or time.strftime("%d") == '15' or np.logical_not(os.path.isfile(settings['model'])):
         logger.info('Retraining model')
         train_model()
     else:
@@ -65,3 +65,6 @@ def main():
     predicted_sign = predict_next_day_sign()
     # Action
     action(logger, predicted_sign)
+
+if __name__== "__main__":
+  main()

@@ -4,9 +4,6 @@ import time
 import logging 
 from _config.settings import *
 
-api_key = '_config/kraken_key.txt'
-buying_hist_file = '_tmp/buying.hist'
-
 
 def buy_coin(logger, volume = '0.01', retry_in_sec = 5):
     kraken = krakenex.API()
